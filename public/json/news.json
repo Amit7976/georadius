@@ -1,0 +1,58 @@
+[
+    {
+        "id": 101,
+        "title": "Major Fire Breaks Out in Downtown",
+        "description": "A major fire broke out in a commercial building downtown, causing panic among residents.",
+        "image": "/images/profileIcon/image.jpg",
+        "publish_time": "2025-03-25T10:30:00Z",
+        "location": "Downtown, Jaipur",
+        "longitude": 75.7873,
+        "latitude": 26.9124,
+        "categories": [ "Fire", "Emergency" ],
+        "source": {
+            "username": "amit_agrawal",
+            "profile_picture": "/images/profileIcon/image.jpg"
+        },
+        "upvote": 120,
+        "downvote": 10,
+        "comments": 45
+    },
+    {
+        "id": 102,
+        "title": "City Park Inaugurated by Mayor",
+        "description": "The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. The new city park was inaugurated today by the Mayor, aiming to provide more green spaces for citizens. ",
+        "image": "/images/profileIcon/image.jpg",
+        "publish_time": "2025-03-25T08:15:00Z",
+        "location": "Central Park, Jaipur",
+        "longitude": 75.8098,
+        "latitude": 26.9205,
+        "categories": [ "Environment", "City Development" ],
+        "source": {
+            "username": "news_reporter_raj",
+            "profile_picture": "/images/profileIcon/image.jpg"
+        },
+        "upvote": 200,
+        "downvote": 5,
+        "comments": 30
+    },
+    {
+        "id": 103,
+        "title": "Traffic Congestion Increases Near Metro Station",
+        "description": "Daily commuters are facing severe traffic congestion near the newly opened metro station.",
+        "image": "",
+        "publish_time": "2025-03-24T18:45:00Z",
+        "location": "Metro Station, Jaipur",
+        "longitude": 75.8023,
+        "latitude": 26.9152,
+        "categories": [ "Traffic", "Transport" ],
+        "source": {
+            "username": "city_updates",
+            "profile_picture": "/images/profileIcon/image.jpg"
+        },
+        "upvote": 80,
+        "downvote": 20,
+        "comments": 15
+    }
+]
+
+

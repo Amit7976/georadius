@@ -4,7 +4,10 @@ import MainContent from './MainContent'
 function page() {
   return (
     <>
-     <MainContent/> 
+      <div className="text-center p-10">
+        <h1 className="text-2xl font-extrabold text-black">Report a News</h1>
+      </div>
+      <MainContent />
     </>
   )
 }

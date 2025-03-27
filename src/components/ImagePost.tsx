@@ -11,7 +11,6 @@ import {
     Trash,
     Send,
     MessageCircle,
-    Bookmark,
 } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle, DrawerHeader } from "@/components/ui/drawer";
 import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from "react-icons/bi";
@@ -185,7 +184,7 @@ const NewsPost: React.FC<NewsPostProps> = ({ news }) => {
                         <Send className="size-6" />
                     </Button>
                 </div>
-                <Button className="" size={100} variant="ghost" onClick={() => setSave(!save)}>
+                <Button className="pl-4 pr-1 py-0.5" size={100} variant="ghost" onClick={() => setSave(!save)}>
                     {save ? (
 
                         <TbBookmarkFilled className="size-6 fill-blue-600" />

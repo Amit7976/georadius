@@ -72,7 +72,7 @@ export default function MainContent() {
     return (
         <div className="bg-white min-h-screen pb-10">
             {/* 🔎 Search Bar */}
-            <div className="p-4 pt-6">
+            <div className="px-2 pt-5">
                 <div className="border-2 w-full rounded-full px-5 flex items-center">
                     <IoSearch className="text-gray-500 text-2xl" />
                     <Input
@@ -92,7 +92,7 @@ export default function MainContent() {
             </div>
 
             {/* 📌 Top Categories Section */}
-            <div className="py-10">
+            <div className="py-8">
                 <h2 className="px-5 font-extrabold text-xl text-black">Top Category</h2>
                 <div className="relative w-full  h-[450px] overflow-x-hidden">
                     {categories.map((item, index) => (
@@ -117,7 +117,7 @@ export default function MainContent() {
             </div>
 
             {/* 🔥 Trending Topics Section */}
-            <div className="py-12">
+            <div className="py-10">
                 <h2 className="px-5 font-extrabold text-xl text-black">Trending Topics</h2>
                 <div className="py-5 pl-4 pr-0">
                     <Swiper spaceBetween={10} slidesPerView={1.15}>

@@ -57,7 +57,7 @@ function MainContent({ params }: any) {
                         Share Profile
                     </Button>
                 </div>
-
+                
                 {/* News Posts */}
                 <div className="mt-6 mb-20">
                     {loading ? (

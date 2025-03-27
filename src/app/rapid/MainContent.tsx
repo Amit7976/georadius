@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-import { IoEllipsisVertical, IoThumbsUp, IoThumbsDown } from "react-icons/io5";
 import { formatDistanceToNow } from "date-fns";
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
@@ -74,13 +73,12 @@ export default function MainContent() {
 
     return (
         <>
-            <div className="bg-black">
+            <div className="bg-neutral-800">
                 <Swiper
                     direction="vertical"
                     slidesPerView={1}
                     pagination={{ clickable: true }}
-                    modules={[Pagination]}
-                    className="h-[94.5vh] w-full"
+                    className="h-[90.5vh] w-full"
                 >
                     {posts.map((post) => (
                         <SwiperSlide key={post.id} className="relative flex items-center justify-center w-full">
@@ -147,7 +145,7 @@ export default function MainContent() {
                                         </p>
                                     </DrawerTrigger>
                                     <DrawerContent className="pt-4 pb-10 px-6">
-                                            <h2 className="text-4xl font-bold px-5 pt-2 text-center">{post.title}</h2>
+                                        <h2 className="text-4xl font-bold px-5 pt-2 text-center">{post.title}</h2>
                                         <DrawerTitle className="space-y-10 overflow-scroll pt-4">
                                             <p className="text-gray-600 text-xl font-medium text-justify leading-8 overflow-scroll">{post.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi cum sit accusamus quae veritatis sapiente, architecto eveniet, totam illum amet aut earum, molestiae praesentium at. Explicabo aut quod suscipit atque cum nostrum nihil error illo aspernatur quae enim, magnam distinctio tenetur facilis minima autem nesciunt impedit! Libero earum ipsum, consequatur nesciunt dolore similique nihil officia beatae ducimus? Sequi pariatur exercitationem, labore numquam perspiciatis laboriosam quibusdam doloremque omnis architecto modi facilis velit earum quam quasi consectetur? Vel, delectus corporis eum sapiente aperiam laboriosam voluptatem asperiores, cupiditate praesentium ipsa tenetur expedita, tempora eveniet rem dolor velit sequi nisi provident est voluptatum quia?</p>
                                         </DrawerTitle>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,6 +9,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { GrMicrophone } from "react-icons/gr";
 import { RiUploadCloud2Line } from "react-icons/ri";
+import { IoLocation, IoLocationOutline } from "react-icons/io5";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 // ✅ Zod Validation Schema
 const formSchema = z.object({
@@ -80,32 +83,111 @@ function MainContent() {
         setSelectedImages([]);
     };
 
+    const [currentLocation, setCurrentLocation] = useState("Fetching location...");
+    const [customLocation, setCustomLocation] = useState<string | null>(null);
+    const [inputValue, setInputValue] = useState("");
+    const [open, setOpen] = useState(false);
+
+
+    // Fetch user location on mount
+    useEffect(() => {
+        if (typeof window !== "undefined" && navigator.geolocation) {
+            navigator.permissions
+                .query({ name: "geolocation" })
+                .then((permission) => {
+                    if (permission.state === "granted" || permission.state === "prompt") {
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                const { latitude, longitude } = position.coords;
+                                setCurrentLocation(`Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)}`);
+                            },
+                            () => setCurrentLocation("Location access denied")
+                        );
+                    } else {
+                        setCurrentLocation("Location permission denied");
+                    }
+                });
+        } else {
+            setCurrentLocation("Geolocation not supported");
+        }
+    }, []);
+
     return (
         <>
-            <div className="text-center py-10 px-6 space-y-3">
-                <h1 className="text-2xl font-extrabold text-black">Post a New News</h1>
-                <p className="text-lg font-medium text-gray-500">
-                    Share the latest updates with the world!
+            <div className="text-center p-10 space-y-3">
+                <h1 className="text-2xl font-extrabold text-black">Report a News</h1>
+                <p className="text-base font-medium text-gray-500">
+                    Share the latest updates, eyewitness reports, and important stories
                 </p>
             </div>
 
             <div className="p-5 space-y-10">
-                {/* Title Input */}
                 <div className="space-y-4">
-                    <div className="flex justify-between items-center gap-5">
-                        <Label className="text-lg font-bold text-black">
-                            News Title <span className="text-red-500">*</span>
-                        </Label>
-                        <GrMicrophone className="text-2xl active:scale-75 duration-300" />
+                    {/* Title Input */}
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center gap-5">
+                            <Label className="text-lg font-bold text-black">
+                                News Title <span className="text-red-500">*</span>
+                            </Label>
+                            <GrMicrophone className="text-2xl active:scale-75 duration-300" />
+                        </div>
+                        <Input
+                            className="h-14 ring-2 ring-gray-400 font-bold focus-visible:ring-green-500 focus-visible:outline-0 focus-visible:border-0"
+                            type="text"
+                            placeholder="Enter News Title"
+                            {...register("title")}
+                        />
+                        {errors.title && <p className="text-red-500">{errors.title.message}</p>}
                     </div>
-                    <Input
-                        className="h-14 ring-2 ring-gray-400 font-bold focus-visible:ring-green-500 focus-visible:outline-0 focus-visible:border-0"
-                        type="text"
-                        placeholder="Enter News Title"
-                        {...register("title")}
-                    />
-                    {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+
+                    <div className="flex items-start gap-1">
+                        <IoLocation className="text-blue-500 text-xl shrink-0 mt-1" />
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                                <button type="button" className="text-blue-500 font-bold text-left">
+                                    {customLocation || currentLocation} <span className="text-gray-400 shrink-0">(click to change)</span>
+                                </button>
+                            </DialogTrigger>
+
+                            {/* Dialog Box */}
+                            <DialogContent className="">
+                                <DialogHeader className="">
+                                    <DialogTitle className="text-lg font-bold mb-5">Enter New Location</DialogTitle>
+                                </DialogHeader>
+                                <Input
+                                    type={"text"}
+                                    value={inputValue}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        setInputValue(e.target.value)
+                                    }
+                                    placeholder="Type location here..."
+                                    className="h-14 border-2 focus-visible:ring-green-500 focus-visible:outline-0 focus-visible:border-0"
+                                />
+                                
+                                <DialogFooter className="mt-2">
+                                    <div className="flex justify-end">
+                                        <Button
+                                            type="button"
+                                            variant={'primary'}
+                                            size={20}
+                                            onClick={() => { setCustomLocation(inputValue); setOpen(false); }}
+                                            className='w-full h-14 border-2 border-gray-500 active:scale-95 text-gray-500 text-lg font-semibold py-3 rounded-lg'
+                                        >
+                                            Save
+                                        </Button></div>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+
+                        {/* Remove Button (only if custom location exists) */}
+                        {customLocation && (
+                            <Button className="border-2 border-red-500 text-red-500" variant="primary" size="sm" onClick={() => setCustomLocation(null)}>
+                                <FaRegTrashCan />
+                            </Button>
+                        )}
+                    </div>
                 </div>
+
 
                 {/* Description Input */}
                 <div className="space-y-4">
@@ -125,7 +207,7 @@ function MainContent() {
 
                 {/* Image Upload */}
                 <div className="space-y-4">
-                    <Label className="text-lg font-bold text-black">Upload Media Files</Label>
+                    <Label className="text-lg font-bold text-black">Attach Media</Label>
                     <div className="relative">
                         <div className={`${(selectedImages.length == 0) ? "h-40" : "h-20"} border-2 flex items-center justify-center flex-col gap-2 rounded-lg`}>
                             <RiUploadCloud2Line className="text-3xl" />
@@ -172,7 +254,7 @@ function MainContent() {
                 >
                     Post News
                 </Button>
-            </div>
+            </div >
         </>
     );
 }
